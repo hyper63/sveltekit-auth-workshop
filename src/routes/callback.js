@@ -13,10 +13,16 @@ export async function get(request) {
   // get user
   const user = await getUser(token)
 
+  request.locals.user = user.login
+
   return {
-    body: JSON.stringify(user, null, 2)
+    status: 302,
+    headers: {
+      location: '/'
+    }
   }
 }
+
 function getUser(token) {
   return fetch(userURL, {
     headers: {

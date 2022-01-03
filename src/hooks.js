@@ -1,8 +1,8 @@
 import cookie from 'cookie'
 
 export async function handle({ request, resolve }) {
-  const cookies = cookie.parse(request.headers.cookie || { user: null })
-
+  const cookies = Object.assign({user: null}, cookie.parse(request.headers.cookie || "") )
+  
   // do some stuff before
   request.locals.user = cookies.user
 
